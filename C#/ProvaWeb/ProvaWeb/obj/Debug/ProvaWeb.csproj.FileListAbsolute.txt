@@ -1,0 +1,9 @@
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\bin\ProvaWeb.dll.config
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\bin\ProvaWeb.dll
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\bin\ProvaWeb.pdb
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\obj\Debug\ProvaWeb.csprojResolveAssemblyReference.cache
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\obj\Debug\ProvaWeb.csproj.CoreCompileInputs.cache
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\obj\Debug\ProvaWeb.dll
+C:\Users\ladis\Desktop\C#\ProvaWeb\ProvaWeb\obj\Debug\ProvaWeb.pdb
