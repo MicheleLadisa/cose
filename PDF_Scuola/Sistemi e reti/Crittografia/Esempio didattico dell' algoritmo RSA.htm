@@ -1,0 +1,257 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title> Esempio didattico dell' algoritmo RSA </title>
+<script>
+<!--
+  var newWindow = null
+
+  function MCD(m,n) //Calcola il massimo comun divisore tra m ed n con algoritmo euclideo
+  {
+        if (m==0) { return n }
+        if (n==0) { return m }
+        if (m<0) { return MCD(-m,n) }
+        if (n<0) { return MCD(m,-n) }
+        if (m<n) { return MCD(n,m)  }
+        if (m>n) {
+                        r=m % n
+                        while(r != 0)
+                        {
+                           m=n
+                           n=r
+                           r=m % n
+                        }
+                        return n
+                 }
+  }
+
+  function CALCOLA_PHI(p,q) // Calcola il totient, dati i due fattori primi del numero
+  {
+        phi=(p-1)*(q-1)
+        return phi
+  }
+
+  function TROVA_E(phi) // Trova un numero e minore di phi e primo con phi
+  {
+        primo=0
+        e=2
+        while(primo!=1)
+        {
+          e=e+1
+          primo=MCD(phi,e)
+        }
+        return e
+   }
+
+   function TROVA_INVERSO(n,m) // Algoritmo esteso Euclide, restituisce l'inverso di n modulo m
+   {
+           u1 = 1
+           u2 = 0
+           u3 = m
+           v1 = 0
+           v2 = 1
+           v3 = n
+           while (v3 != 0)
+           {
+             q = Math.floor(u3/v3)
+             t1 = u1 - q * v1
+             t2 = u2 - q * v2
+             t3 = u3 - q * v3
+
+             u1 = v1
+             u2 = v2
+             u3 = v3
+
+             v1 = t1
+             v2 = t2
+             v3 = t3
+             z = 1
+           }
+           uu = u1
+           vv = u2
+           if (vv < 0) { inverso = vv + m }
+                else { inverso = vv }
+           return inverso
+   }
+
+   function POTENZAMOD(n,e,m)
+   {
+        if (m == 0 || e < 0) { return 0 }
+        res = 1
+        pow = n
+        e1  = e
+        while (e1 != 0) {
+                          d   = e1%2
+                          e1  = Math.floor(e1/2)
+                          if (d == 1) { res = (res*pow)%m }
+                          pow = (pow*pow)%m
+                        }
+        if (res < 0) { res += m }
+        return res
+   }
+
+   function CALCOLIBASE(form)
+   {
+     var P = form.p.value
+     var Q = form.q.value
+     N   = P * Q
+     PHI = CALCOLA_PHI(P,Q)
+     E   = TROVA_E(PHI)
+     D   = TROVA_INVERSO(E,PHI)
+     form.n.value   = N
+     form.phi.value = PHI
+     form.e.value   = E
+     form.d.value   = D
+     form.e1.value   = E
+     form.n1.value   = N
+     form.d2.value  = D
+     form.n2.value   = N
+   }
+
+   function CIFRARSA(form)
+   {
+     var numero = form.messaggio.value
+     var esponente = form.e.value
+     var modulo = form.n1.value
+     form.chiaro1.value = numero
+     form.cifrato1.value = POTENZAMOD(numero,esponente,modulo)
+     form.cifrato2.value = POTENZAMOD(numero,esponente,modulo)
+   }
+
+   function DECIFRARSA(form)
+   {
+     var numero = form.cifrato2.value
+     var esponente = form.d.value
+     var modulo = form.n1.value
+
+     form.chiaro2.value = POTENZAMOD(numero,esponente,modulo)
+     form.messaggio2.value = POTENZAMOD(numero,esponente,modulo)
+   }
+-->
+</script></head>
+
+
+
+<body><center>
+<h2>Esempio didattico dell' algoritmo RSA</h2>
+</center>
+<p>&nbsp;</p>
+<p>Questa pagina illustra il funzionamento dell'algoritmo di cifratura a chiave pubblica RSA.
+  Allo scopo di rendere comprensibile il meccanismo, sono stati utilizzati solo numeri primi molto piccoli
+  e viene codificato solo un carattere alla volta: in una implementazione più realistica, allo scopo di aumentare
+  la sicurezza del cifrario ed impedire la fattorizzazione "a forza bruta", le chiavi devono essere
+  lunghe almeno 300 cifre (1024bit). I caratteri dovrebbero essere inoltre raggruppati in blocchi
+  prima di essere cifrati/decifrati per impedire gli attacchi basati sull'analisi delle frequenze </p>
+<form><p></p><hr>
+<h3>Prima parte: generazione delle chiavi</h3>
+Occorre scegliere due numeri primi p,q a partire dai quali verranno generate
+la chiave pubblica e quella privata:
+<ol>
+<center>
+<table border="0" width="50%">
+<tbody><tr><td align="left">p =</td><td> <select name="p">
+<option value="5">5
+</option><option value="11" selected="selected">11
+</option><option value="19">19
+</option><option value="29">29
+</option><option value="37">37
+</option></select>    </td></tr>
+
+<tr><td align="left">q =</td><td> <select name="q">
+<option value="3">3
+</option><option value="7">7
+</option><option value="13">13
+</option><option value="17" selected="selected">17
+</option><option value="23">23
+</option><option value="31">31
+</option></select>    </td></tr>
+<tr><td align="center"><input value="Effettua i calcoli" onclick="CALCOLIBASE(this.form)" type="button">  </td></tr>
+
+<tr><td align="left"> N = p.q   =</td><td> <input size="3" name="n" type="text"> &nbsp;</td></tr>
+<tr><td align="left"> &#966;(N) = (p-1).(q-1) = </td><td><input size="3" name="phi" type="text"> &nbsp; </td></tr>
+<tr><td align="left"> e (un numero minore di &#966; e primo con &#966;)    =</td><td> <input size="3" name="e" type="text"> &nbsp;</td></tr>
+<tr><td align="left"> d (inverso moltiplicativo di e modulo &#966;)    =</td><td> <input size="3" name="d" type="text"> &nbsp;</td></tr>
+<tr><td align="left"><b> Chiave pubblica (e,N) = </b></td><td> <input size="3" name="e1" type="text">, <input size="3" name="n1" type="text"> &nbsp;</td></tr>
+<tr><td align="left"><b> Chiave privata (d,N) = </b></td><td> <input size="3" name="d2" type="text">, <input size="3" name="n2" type="text"> &nbsp;</td></tr>
+</tbody></table></center></ol>
+<hr>
+<h3>Seconda parte: cifratura di un messaggio</h3>
+Il messaggio in chiaro viene trasformato nel messaggio cifrato utilizzando la chiave
+pubblica trovata in precedenza
+<ol><center><table border="0" width="50%">
+<tbody><tr><td align="left"> Seleziona un carattere da cifrare: </td>
+<td><select name="messaggio">
+<option value="1">A
+</option><option value="2">B
+</option><option value="3">C
+</option><option value="4">D
+</option><option value="5">E
+</option><option value="6">F
+</option><option value="7">G
+</option><option value="8">H
+</option><option value="9">I
+</option><option value="10">J
+</option><option value="11" selected="selected">K
+</option><option value="12">L
+</option><option value="13">M
+</option><option value="14">N
+</option><option value="15">O
+</option><option value="16">P
+</option><option value="17">Q
+</option><option value="18">R
+</option><option value="19">S
+</option><option value="20">T
+</option><option value="21">U
+</option><option value="22">V
+</option><option value="23">W
+</option><option value="24">X
+</option><option value="25">Y
+</option><option value="26">Z
+</option></select></td></tr>
+<tr><td align="center"><input value="Effettua la codifica" onclick="CIFRARSA(this.form)" type="button">  </td></tr>
+<tr><td align="left"> Conversione del carattere in valore numerico (A=1...Z=26) = </td><td> <input size="3" name="chiaro1" type="text">&nbsp;</td></tr>
+<tr><td align="left"><b> Risultato della cifratura C=(M<sup>e</sup> mod N) = </b></td><td> <input size="3" name="cifrato1" type="text">&nbsp;</td></tr>
+</tbody></table></center></ol>
+
+<hr>
+<h3>Terza parte: decifratura di un messaggio</h3>
+Il messaggio cifrato viene trasformato nel messaggio in chiaro utilizzando la chiave privata
+<ol>
+<center><table border="0" width="50%">
+<tbody><tr><td align="left"> Valore numerico corrispondente al messaggio cifrato = </td><td> <input size="3" name="cifrato2" type="text">&nbsp;</td></tr>
+<tr><td align="center"><input value="Effettua la decodifica" onclick="DECIFRARSA(this.form)" type="button">  </td></tr>
+<tr><td align="left"><b> Risultato della decifratura M=(C<sup>d</sup> mod N) = </b></td><td> <input size="3" name="chiaro2" type="text">&nbsp;</td></tr>
+<tr><td align="left">Riconversione del numero in carattere (1=A...26=Z) = </td>
+<td><select name="messaggio2">
+<option value="1">A
+</option><option value="2">B
+</option><option value="3">C
+</option><option value="4">D
+</option><option value="5">E
+</option><option value="6">F
+</option><option value="7">G
+</option><option value="8">H
+</option><option value="9">I
+</option><option value="10">J
+</option><option value="11">K
+</option><option value="12">L
+</option><option value="13">M
+</option><option value="14">N
+</option><option value="15">O
+</option><option value="16">P
+</option><option value="17">Q
+</option><option value="18">R
+</option><option value="19">S
+</option><option value="20">T
+</option><option value="21">U
+</option><option value="22">V
+</option><option value="23">W
+</option><option value="24">X
+</option><option value="25">Y
+</option><option value="26">Z
+</option><option value="27" selected="selected">
+</option></select></td></tr>
+
+
+
+
+</tbody></table></center></ol></form></body></html>

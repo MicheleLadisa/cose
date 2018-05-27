@@ -1,0 +1,292 @@
+document.writeln('<meta property="fb:admins" content="{paolo.bonavoglia}">');
+document.writeln('<div id="fb-root"></div><script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, \'script\', \'facebook-jssdk\')); </script>');
+
+function GetElement(nome){
+   return document.getElementById(nome);
+}
+
+function WinWidth(){
+	if (window.navigator.appName == "Microsoft Internet Explorer") {
+		return document.body.clientWidth;
+	} else {
+		return window.innerWidth;
+	}
+}
+
+function PopupXY(nome, menuItem, dx, dy, wi, hi){
+	PopCloseHint();
+	showBox = GetElement(nome);
+	mleft = menuItem.offsetLeft + dx;
+	mtop  = menuItem.offsetTop + menuItem.offsetHeight + dy;
+	parente = menuItem.offsetParent;
+	while (parente){
+		mtop  += parente.offsetTop; 
+		mleft += parente.offsetLeft;
+		parente = parente.offsetParent;
+	}
+	if (wi) {
+		out_right = mleft + wi*1.2 - WinWidth();
+		if (out_right > 0) mleft = mleft - out_right;
+	}
+	if (wi) showBox.style.width = wi;
+	if (hi) showBox.style.height = hi;
+	if (mleft < 0) mleft = 0;
+	if (mtop < 0) mtop = 0;
+	showBox.style.top  = mtop; 
+	showBox.style.left = mleft;
+	showBox.style.visibility = "visible";
+}
+
+function PopupHint(nome, menuItem, wi){
+	PopupXY(nome, menuItem, -64, -8, wi)
+}
+
+function PopClose(nome){
+	showBox = GetElement(nome);
+	if (showBox){
+		showBox.style.visibility = "hidden";
+		return true
+	} else {
+		return false
+	}
+}
+
+function PopCloseAllNamed(name){
+	conta = 0;
+	while (PopClose(name+conta)) {++conta;}
+	return conta;
+}
+
+function PopCloseHint(){
+	return PopCloseAllNamed('Hint');
+}
+
+
+Autori = new Array();
+
+Autori[''] = new Array('', '');
+Autori['C'] = new Array('Paolo Bonavoglia', 'paolo@bonavoglia.eu');
+Autori['WM'] = new Array('Paolo Bonavoglia', 'paolo@bonavoglia.eu');
+Autori['AC'] = new Array('Annalisa Caretto (IIA 1997/98)', '');
+Autori['LP'] = new Array('Luca Poli (IIA 1997/98)', '');
+Autori['NA'] = new Array('Nabil Amirouchene (VB 1996/97)', '');
+Autori['AL'] = new Array('Nabil Amirouchene & Alvise Lenassi (VB 1996/97)', '');
+Autori['BC'] = new Array('Valentina Berengo ed Elena Costa (VA 1996/97)', '');
+Autori['BCC'] = new Array('Valentina Berengo ed Elena Costa (VA 1996/97)<br>Revisione di Paolo Bonavoglia (2004)', 'paolo.bonavoglia@liceofoscarini.it');
+Autori['PG'] = new Array('Piero Geotti (VA 1996/97)', '');
+Autori['AO'] = new Array('Andrea Ongaro (IIB 2002/03)', '');
+Autori['MS'] = new Array('Mauro Sperandio (I A 1996/97)', '');
+Autori['DB'] = new Array('Daniele Bindoni (I A 1996/97)', '');
+Autori['GP'] = new Array('Giorgia Penso (I A 1996/97)', '');
+Autori['RM'] = new Array('Riccardo Mel (IIB 2002/03)', '');
+Autori['MO'] = new Array('Riccardo Mel e Andrea Ongaro (IIB 2002/03)', '');
+Autori['FI'] = new Array('Giacomo Infelise e Alessia Fornelli (IIB 2002/03)', '');
+Autori['EM'] = new Array('Monica Enzo, Elena Michieli (VB 1996/97)', '');
+
+
+Titolo		= "La Crittografia da Atbash a RSA";
+WebMaster	= "Paolo Bonavoglia";
+URLSito		= "http://www.crittologia.eu/";
+MailWeb		= "paolo@bonavoglia.eu";
+NomeScuola	= "Liceo Classico M.Foscarini Venezia";
+Indirizzo	= "Cannaregio 4942 - 30131 VENEZIA";
+Telefono	= "0415224845";
+Fax	     	= "0415201657";
+
+function GetElement(nome){
+   return document.getElementById(nome);
+}
+
+function IntRandom(hi){
+	var ind = Math.floor(hi*Math.random());
+	if (ind == hi) --ind;
+	return ind;
+}
+
+Array.prototype.Set = function(ind){
+	var foto  = GetElement('Foto');
+	foto.src = this[ind][0];
+	if (this[ind][2]) foto.style.width  = this[ind][2];
+	if (this[ind][3]) foto.style.height = this[ind][3];
+	GetElement('Legenda').innerHTML = this[ind][1];
+	GetElement('Scelta').value = ind;
+}
+
+Array.prototype.Change = Array.prototype.Set;
+
+Array.prototype.Random = function(hi){
+	this.Set(IntRandom(hi));
+}
+
+Array.prototype.Next = function(){
+	var ind = GetElement('Scelta').value;
+	if (ind < this.length - 1) ++ind; else ind = 0;
+	this.Set(ind);
+}
+
+Array.prototype.Prev = function(){
+	var ind = GetElement('Scelta').value;
+	if (ind > 0) --ind; else ind = this.length -1;
+	this.Set(ind);
+}
+
+Array.prototype.MMSet = function(ind){
+	var media = GetElement('Media');
+	var html = '<';
+	posext = this[ind][0].indexOf('.');
+	var ext = this[ind][0].substr(posext+1, 7);
+	if ((ext  == 'jpeg') || (ext == 'jpg') || (ext == 'png') || (ext == 'gif')) {
+		html += "img src= '" + this[ind][0] +"'";
+	} else if ((ext == 'wma') ||(ext == 'mp3') || (ext == 'mpg') || (ext == 'mpeg')){
+		html += "embed src='" + this[ind][0] +"'";
+	} else if (ext == 'YouTube') {
+		sorg = 'http://www.youtube.com/v/' + this[ind][0].substr(7, 255) + '&hl=it&rel=0&fs=1&color2=0xe4a400';
+		html += "embed type='application/x-shockwave-flash' src='" + sorg + "'";
+	} else {
+		sorg = 'http://video.google.com/googleplayer.swf?docid=' + this[ind][0].substr(6, 255) + '&amp;hl=it&amp;fs=true';
+		html += "embed type='application/x-shockwave-flash' src='" + sorg + "'";
+	}
+	if (this[ind][2]) html += "width= " + this[ind][2] + " style='width:" + this[ind][2] + ";'";
+	if (this[ind][3]) html += "height= " + this[ind][3] + " style='height:" + this[ind][3] + ";'";
+	html += '>';
+	media.innerHTML = html;
+	GetElement('Legenda').innerHTML = this[ind][1];
+	GetElement('Scelta').value = ind;
+}
+
+Array.prototype.MMNext = function(){
+	var ind = GetElement('Scelta').value;
+	if (ind < this.length - 1) ++ind; else ind = 0;
+	this.MMSet(ind);
+}
+
+Array.prototype.MMPrev = function(){
+	var ind = GetElement('Scelta').value;
+	if (ind > 0) --ind; else ind = this.length -1;
+	this.MMSet(ind);
+}
+
+
+function ScrivIndirizzo(){
+	document.write('Liceo Ginnasio Statale "Marco Foscarini"<BR>')
+	document.write(Indirizzo, '<BR>')
+	document.write('Tel: ', Telefono, '<BR>')
+	document.write('Fax: ', Fax)
+}
+
+function ScriviMail(aMail){
+	document.write('<A HREF="mailto:', aMail, '">', aMail, '</A>')
+}
+
+function ScriviAutore(sigla){
+	if (sigla.length > 4) {
+		document.write(sigla);
+	} else if (sigla.length > 0){ 
+		document.write(Autori[sigla][0]);
+		mail_at = Autori[sigla][1]
+		if (mail_at.length > 0){
+			document.write(' (<A HREF="mailto:', mail_at, '">', mail_at, '</A>)');
+		}
+	} else {
+		document.write('...');
+	}
+}
+
+
+function ScriviAutori(sigla){
+	while (true){
+		fine = sigla.indexOf(',');
+		if (fine < 0) {
+			ScriviAutore(sigla);
+			break;
+		} else {
+			autore = sigla.slice(0, fine);
+//			alert(autore);
+			ScriviAutore(autore);
+		}
+		sigla = sigla.slice(fine+1);
+		document.write(' e ');
+//		alert(sigla);
+	}
+}
+
+function ScriviWebMaster(){
+	document.write(WebMaster, ' (<A HREF="mailto:', MailWeb, '">')
+	document.write(MailWeb, '</A>)')
+}
+
+function ScriviLogo(dir){
+	document.write('<img src="/studenti/crittografia/logo.png" usemap="#Logo">');
+	document.write('<map name="Logo">');
+	document.write('<area shape="rect" coords="10,8,192,58"  href="/studenti/crittografia/index.html">');
+	document.write('<area shape="rect" coords="7,80,194,96" href="/index.html">');
+	document.write('</map>');
+}
+
+function Home(dir){
+	document.write('<A HREF="', dir, 'index.shtml">')
+	document.write(NomeScuola, '</A>')
+}
+
+function HomeCritto(dir){
+	document.write('<A HREF="', dir, '../storia/storia.html">')
+	document.write('Storia della Crittografia</A>')
+}
+
+function HomeBio(dir){
+	document.write('<A HREF="', dir, 'grandi.html">')
+	document.write('I grandi nomi della Crittografia</A>')
+}
+
+function ScriviUltimaData(){
+	var datAgg = new Date(document.lastModified);
+	with (datAgg) {
+		var anno = getFullYear();
+		if (anno < 1980) {anno += 100}
+		document.writeln(getDate(), '-', getMonth()+1, '-', anno, '<BR>');
+	}
+}
+
+function FacebookComment(){
+	document.writeln('<div class="fb-comments" data-href="', location.href, '" data-width="470" data-num-posts="2"></div>');
+}
+
+function FacebookLike(){
+	document.write('<iframe src="http://www.facebook.com/plugins/like.php?href=', location.href);
+	document.writeln('&amp;send=false&amp;layout=standard&amp;width=1024&amp;show_faces=true&amp;font=trebuchet+ms&amp;colorscheme=light&amp;action=like&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>');
+}
+
+function ScriviCoda(dir, autore, fonte){
+	document.writeln("<hr style='clear: both;'>");
+	FacebookLike();
+	document.writeln("<br style='clear: both;'>");
+	FacebookComment();
+	document.writeln("<hr style='clear: both;'>");
+
+	document.write('<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">La Crittografia da Atbash a RSA</span> di<a xmlns:cc="http://creativecommons.org/ns#" href="http://paolo.bonavoglia.eu/" property="cc:attributionName" rel="cc:attributionURL">Paolo Bonavoglia</a> è distribuito con Licenza <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.crittologia.eu/" rel="dct:source">http://www.crittologia.eu/</a>.');
+
+// http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title" style="font-style: italic;">La crittografia da Atbash a RSA</span> di <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Paolo Bonavoglia</span> è distribuito con Licenza <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale</a>.');
+	document.write("<br>(In altri termini: <i>Testi e figure possono essere riprodotti liberamente a condizione ");
+	document.write(" che venga citata esplicitamente la fonte con un link e il nome dell'autore.)");
+//	document.write(" e che la cosa non abb.</i>)")
+	document.write('<hr><p>Pagina a cura di <em>')
+	ScriviAutori(autore);
+	document.write('</em> del </p><dl>')
+	document.write('<dt><a href="http://paolo.bonavoglia.eu">Spazio web di Paolo Bonavoglia</a></dt>')
+	document.write('<dd><a href="mailto:', MailWeb, '">Scrivetemi via E-Mail</a>')
+	document.write('<dd><a href="/registro.phtml">Firmate il registro visitatori</a>')
+	document.write('<dd><a href="/glossar.htm">Glossario</a>')
+	if (fonte == '') {
+		document.write('<dd><a href="/bibliografia.html">Bibliografia</a>')
+	} else {
+		document.write('<dt>Bibliografia')
+		document.write('<dd><a href="/bibliografia.html">', fonte, '</a>')
+	}
+	document.write('</dl>')
+}
+
+function Carica(source, wid){
+	Foto.src = source;
+	Foto.width = wid;
+	Link.href = source;
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0048)http://www.crittologia.eu/critto/rsa/metodo.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="author" lang="it" content="Paolo Bonavoglia">
+	 
+	<meta name="description" content="La Crittografia, le sue tecniche, la sua storia" <meta="" http-equiv="keywords">
+	<link rel="shortcut icon" href="http://www.crittologia.eu/studenti/crittografia/critto.ico" type="image/x-icon">
+	<link rel="stylesheet" href="./Cifrario RSA_ il metodo_files/stili.css" type="text/css">
+	<script id="facebook-jssdk" src="./Cifrario RSA_ il metodo_files/all.js.download"></script><script type="text/javascript" src="./Cifrario RSA_ il metodo_files/funzioni.js.download"></script><meta property="fb:admins" content="{paolo.bonavoglia}">
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_loader{background-color:#f6f7f9;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;bottom:0;left:0;right:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #29487d;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f9;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style></head><body><div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Cifrario RSA_ il metodo_files/nRK_i0jz87x.html" style="border: none;"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" src="./Cifrario RSA_ il metodo_files/nRK_i0jz87x(1).html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div><script>(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/it_IT/all.js#xfbml=1"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk')); </script>
+
+	<title>Cifrario RSA: il metodo</title>
+
+
+
+
+<span class="Logo"><a href="http://www.crittologia.eu/index.html"><img src="./Cifrario RSA_ il metodo_files/logo.png" alt="Logo"></a></span>
+<div class="Ancora"><a href="http://www.crittologia.eu/critto/pubblica.htm">Cifrari a chiave pubblica</a>
+	-&gt; <a href="http://www.crittologia.eu/critto/rsa/rsa.html">Il cifrario RSA</a>
+</div>
+<div class="Titolo">Cifrario RSA: il metodo</div>
+<div class="Ancora"><a href="http://www.crittologia.eu/critto/mate/eulero.html">La funzione di Eulero</a>
+	- <a href="http://www.crittologia.eu/critto/rsa/rsa_demo.phtml">Cifrario RSA: demo</a>
+	- <a href="http://www.crittologia.eu/critto/rsa/rsa_permuta.phtml">RSA è una permutazione</a>
+</div>
+
+<br style="clear: both;">
+
+<p>
+RSA è un <a href="http://www.crittologia.eu/critto/pubblica.htm">cifrario a chiave pubblica</a> che permette di cifrare un messaggio attraverso un procedimento che sfrutta le proprietà dei <a href="http://www.crittologia.eu/critto/veprimo.htm"> numeri primi</a>. Supponiamo di avere come corrispondenti i soliti Aldo e Biagio.
+</p><p>
+Alla pagina <a href="http://www.crittologia.eu/critto/rsa/rsa_demo.phtml">Cifrario RSA: demo</a> un demo PhP permette di provare il cifrario per numeri inferiori a 200 e per fini puramente dimostrativi; nella pratica si usano numeri molto più grandi (almeno 512 bit, che corrispondono a 170 cifre decimali!!)
+</p>
+
+<h3>Aldo genera le sue chiavi pubbliche e private</h3>
+<ul style="list-style-type: square;">
+<li>Aldo genera due <a href="http://www.crittologia.eu/mate/primi.html">numeri primi</a> distinti <b>p</b> e <b>q</b> e li moltiplica tra di loro ottenendo 
+il numero <b>N</b> che viene reso pubblico, mentre <b>p</b> e <b>q</b> devono restare segreti.
+	<ul style="list-style-type: circle;">
+	<li><b>Esempio:</b>
+		<table class="Cornice">
+		<tbody><tr><td align="center">p = 5; q = 11<br> p.q = 5.11 = <b>55</b>
+		</td></tr><tr><td align="center">
+		<b>N = 55</b>
+		</td></tr></tbody></table>
+	</li>
+	</ul>
+
+
+</li><li>Aldo calcola <b>b</b> che è la <a href="http://www.crittologia.eu/mate/eulero.html">funzione di Eulero</a> di <b>n</b>:
+	<b>b</b> = Φ(n) = (p-1)*(q-1). Il numero <b>b</b> deve restare segreto.
+	<ul style="list-style-type: circle;">
+	<li><b>Esempio:</b>
+		<table class="Cornice">
+		<tbody><tr><td align="center">
+		Φ(55) = (5 - 1).(11 - 1) = 4.10 = <b>40</b>
+		</td></tr><tr><td align="center">
+		<b>b = 40</b>
+		</td></tr></tbody></table>
+	 </li>
+	</ul>
+
+</li><li>Aldo calcola il primo intero <b>e</b> che sia primo con <b>b</b> (non abbia divisori in comune, ovvero MCD(e, b) = 1). Il numero <b>e</b> è la seconda chiave pubblica.
+	<ul style="list-style-type: circle;">
+	<li><b>Esempio: </b>
+<table class="Cornice">
+<tbody><tr><td>
+<pre>e = 2 -&gt; MCD(2, 40) = 2  NO
+e = 3 -&gt; MCD(3, 40) = 1  SI</pre>
+</td></tr><tr><td align="center">
+		<b>e = 3</b>
+</td></tr></tbody></table>
+	</li></ul>
+
+
+</li><li>Aldo calcola il numero <b>d</b> <a href="http://www.crittologia.eu/mate/inverso.html">inverso</a> di <b>e</b> 
+	nell'<a href="http://www.crittologia.eu/mate/aritfin.html">aritmetica finita</a> di ordine <b>b</b>, che è il più 
+	piccolo x per cui sia <b>e.d</b> mod <b>b</b> = 1; 
+	il numero <b>d</b> é la chiave per decifrare e deve restare segreto. 
+	Si potrebbe usare il <a href="http://www.crittologia.eu/mate/inverso.html">metodo basato sulla funzione di Eulero</a> ma 
+	per numeri grandi la complessità sarebbe proibitiva; molto più efficiente un'estensione del classico algoritmo di Euclide per l'MCD; qui a titolo esemplificativo usiamo un semplice metodo a tentativi:
+	<ul>
+	<li><b>Esempio:</b> 
+
+<br>
+<table class="Cornice">
+<tbody><tr><td>
+<pre>d =  2 -&gt; 2.3 mod 40 =  6 NO
+d =  3 -&gt; 3.3 mod 40 =  9 NO
+d =  4 -&gt; 4.3 mod 40 = 12 NO
+	...
+d = 26 -&gt; 26.3 mod 40 = 78 mod 40 = 38 NO
+d = 27 -&gt; 27.3 mod 40 = 81 mod 40 =  1 SI</pre>
+</td></tr><tr><td align="center">
+		<b>d = 27</b>
+</td></tr></tbody></table>
+
+</li></ul>	
+</li></ul>
+
+<h3>Biagio invia un messaggio ad Aldo</h3>
+
+<p>Per trasmettere un messaggio ad Aldo, Biagio lo scompone inizialmente in una sequenza di 
+	numeri (in precedenza ci si è accordati riguardo alla modalità 
+	di "traduzione"; potrebbero essere p.es. i codici ASCII dei singoli caratteri ma così il cifrario 
+	degenererebbe in un banale <a href="http://www.crittologia.eu/critto/monoalf0.htm">cifrario monoalfabetico</a>): 
+	(m<sub>1</sub>, m<sub>2</sub>....m<sub>r</sub>).
+</p><p>
+Quindi Biagio legge le chiavi pubbliche di Aldo <b>N</b> e <b>e</b> e trasmette i numeri <b>m</b> uno alla volta cifrandoli con la formula 
+	<b>c=m<sup>e</sup> mod n</b>.
+</p>
+<ul>
+<li><b>Esempio:</b> per trasmettere il numero <b>7</b>, Biagio calcola c = m<sup>e</sup> mod N = 7<sup>3</sup> mod 55 = 343 mod 55 = 13; il numero da trasmettere è quindi <b>13</b>.
+</li></ul>
+
+<h3>Aldo decifra il messaggio cifrato di Biagio</h3>
+
+<p>
+	Aldo usa per questo la chiave di decifrazione <b>d</b>, segreta, che permette di recuperare m grazie alla formula <b>m</b> = c<sup>d</sup> mod N; infatti <a href="http://www.crittologia.eu/mate/inverso.html#dimostra">si dimostra</a> che c<sup>d</sup> mod N = <b>m</b>.
+</p>
+
+	<ul>
+	<li><b>Esempio:</b> m = c<sup>d</sup> mod n = 13<sup>27</sup> mod 55 = <b>7</b> 
+	(<a href="http://www.crittologia.eu/critto/rsa/rsa_demo.phtml?num1=5&amp;num2=11&amp;chiaro=7&amp;Apply=Cifra">provare per credere!</a>)
+	</li></ul>
+
+<h3>Riassumendo</h3>
+<p>
+Riassumiamo nella seguente tabella i numeri necessari al cifrario RSA
+</p>
+
+<table class="Cornice" border="" align="center">
+<tbody><tr><th>Utente</th><th colspan="2">Parte pubblica</th><th colspan="3">Parte segreta
+</th></tr><tr><td>Aldo</td><td>N</td><td>e</td><td>p, q [N = p*q]</td><td>b = Φ(N)</td><td>d
+</td></tr><tr><td>Esempio</td><td>55</td><td>3</td><td>5, 11 [55 = 5*11]</td><td>40 = Φ(55)</td><td>27
+</td></tr></tbody></table>
+
+<p>
+In effetti RSA, dati gli N possibili messaggi (numeri) da 0 a N-1, effettua una permutazione degli stessi, come si può verificare nella pagina <a href="http://www.crittologia.eu/critto/rsa/rsa_permuta.phtml">RSA è una permutazione</a>.
+</p>
+
+<h3>RSA e il teorema cinese del resto</h3>
+<p>
+RSA richiede di eseguire calcoli modulari con modulo <i>pq</i> che è un numero molto grande (a 1024 o 2048 bit oggi); con numero così grandi i tempi possono essere molto lunghi; un metodo che viene spesso usato per ridurre il tempo di esecuzione <a href="http://www.crittologia.eu/mate/prodotto_resto_cinese.phtml">fa uso del teorema cinese del resto</a>.
+</p>
+
+<br style="clear: both;">
+<hr>
+
+<h4>Fonti bibliografiche e collegamenti</h4>
+
+<div style="float: right;">
+<a href="http://validator.w3.org/check/referer">
+<img border="0" src="./Cifrario RSA_ il metodo_files/valid-html401.png" alt="Valido HTML 4.01!">
+</a>
+</div>
+
+<ul style="list-style-type: circle;">
+<li><b>P.Ferragina, F.Luccio</b> <i>Crittografia - Principi Algoritmi Applicazioni</i> Bollati Boringhieri 2001  <b>pag.121</b></li>
+
+<li><a href="http://www.rsasecurity.com/rsalabs/node.asp?id=2214" class="Esterna">What is the RSA cryptosystem?</a>: una spiegazione sintetica di RSA, dal sito ufficiale RSA Security</li>
+<li><a href="http://www.di-mgt.com.au/rsa_alg.html" class="Esterna">RSA Algorithm</a>: una spiegazione 
+molto esauriente e dettagliata del metodo (in inglese)</li>
+</ul>
+
+
+<script type="text/javascript">ScriviCoda('', 'BCC', '')</script><hr style="clear: both;">
+<iframe src="./Cifrario RSA_ il metodo_files/like.html" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowtransparency="true"></iframe>
+<br style="clear: both;">
+<div class="fb-comments fb_iframe_widget" data-href="http://www.crittologia.eu/critto/rsa/metodo.html" data-width="470" data-num-posts="2" fb-xfbml-state="rendered"><span style="height: 183px; width: 470px;"><iframe id="f83d70556071c" name="f2b82f9c9be9614" scrolling="no" title="Facebook Social Plugin" class="fb_ltr" src="./Cifrario RSA_ il metodo_files/comments.html" style="border: none; overflow: hidden; height: 183px; width: 470px;"></iframe></span></div>
+<hr style="clear: both;">
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licenza Creative Commons" style="border-width:0" src="./Cifrario RSA_ il metodo_files/88x31.png"></a><br><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">La Crittografia da Atbash a RSA</span> di<a xmlns:cc="http://creativecommons.org/ns#" href="http://paolo.bonavoglia.eu/" property="cc:attributionName" rel="cc:attributionURL">Paolo Bonavoglia</a> è distribuito con Licenza <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribuzione - Non commerciale - Condividi allo stesso modo 4.0 Internazionale</a>.<br>Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.crittologia.eu/" rel="dct:source">http://www.crittologia.eu/</a>.<br>(In altri termini: <i>Testi e figure possono essere riprodotti liberamente a condizione  che venga citata esplicitamente la fonte con un link e il nome dell'autore.)<hr><p>Pagina a cura di <em>Valentina Berengo ed Elena Costa (VA 1996/97)<br>Revisione di Paolo Bonavoglia (2004) (<a href="mailto:paolo.bonavoglia@liceofoscarini.it">paolo.bonavoglia@liceofoscarini.it</a>)</em> del </p><dl><dt><a href="http://paolo.bonavoglia.eu/">Spazio web di Paolo Bonavoglia</a></dt><dd><a href="mailto:paolo@bonavoglia.eu">Scrivetemi via E-Mail</a></dd><dd><a href="http://www.crittologia.eu/registro.phtml">Firmate il registro visitatori</a></dd><dd><a href="http://www.crittologia.eu/glossar.htm">Glossario</a></dd><dd><a href="http://www.crittologia.eu/bibliografia.html">Bibliografia</a></dd></dl>
+
+
+
+</i></body></html>
